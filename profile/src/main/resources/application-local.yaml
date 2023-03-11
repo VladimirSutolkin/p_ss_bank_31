@@ -4,7 +4,7 @@ server:
     context-path: /api/profile
 management:
   server:
-    port: 8189
+    port: 8089
   endpoint:
     shutdown:
       enabled: true
@@ -15,8 +15,8 @@ management:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: user
-    password: password
+    username: postgres
+    password: Polpa12siM!
   liquibase:
     default-schema: profile
     change-log: db/changelog/db.changelog-master.yaml
