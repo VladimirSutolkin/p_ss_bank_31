@@ -4,7 +4,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "address")
-public class actual_registration {
+public class ActualRegistration {
 
 
 
@@ -45,11 +45,11 @@ public class actual_registration {
         @Column(name = "index", nullable = false)
         private Long index;
 
-        public actual_registration() {
+        public ActualRegistration() {
         }
 
-        public actual_registration(String country, String region, String city, String district, String locality, String street,
-                       String houseNumber, String houseBlock, String flatNumber, Long index) {
+        public ActualRegistration(String country, String region, String city, String district, String locality, String street,
+                                  String houseNumber, String houseBlock, String flatNumber, Long index) {
             this.country = country;
             this.region = region;
             this.city = city;
@@ -154,7 +154,7 @@ public class actual_registration {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        actual_registration that = (actual_registration) o;
+        ActualRegistration that = (ActualRegistration) o;
         return Objects.equals(id, that.id) && Objects.equals(country, that.country) && Objects.equals(region, that.region) && Objects.equals(city, that.city) && Objects.equals(district, that.district) && Objects.equals(locality, that.locality) && Objects.equals(street, that.street) && Objects.equals(houseNumber, that.houseNumber) && Objects.equals(houseBlock, that.houseBlock) && Objects.equals(flatNumber, that.flatNumber) && Objects.equals(index, that.index);
     }
 
@@ -165,7 +165,7 @@ public class actual_registration {
 
     @Override
     public String toString() {
-        return "actual_registration{" +
+        return "ActualRegistration{" +
                 "id=" + id +
                 ", country='" + country + '\'' +
                 ", region='" + region + '\'' +

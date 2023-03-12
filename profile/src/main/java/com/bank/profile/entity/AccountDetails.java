@@ -1,13 +1,14 @@
 package com.bank.profile.entity;
 import javax.persistence.*;
+import java.util.Objects;
 
-public class account_details {
+@Entity
+@Table(name = "account_details_id")
+public class AccountDetails {
 
 
 
-  @javax.persistence.Entity
-    @Table(name = "account_details_id")
-    public class Entity {
+
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +21,10 @@ public class account_details {
         @Column(name = "profile_id", nullable = false)
         private Long profileId;
 
-        public Entity() {
+        public AccountDetails() {
         }
 
-        public Entity(Long accountId, Long profileId) {
+        public AccountDetails(Long accountId, Long profileId) {
             this.accountId = accountId;
             this.profileId = profileId;
         }
@@ -51,5 +52,18 @@ public class account_details {
         public void setProfileId(Long profileId) {
             this.profileId = profileId;
         }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountDetails that = (AccountDetails) o;
+        return Objects.equals(id, that.id) && Objects.equals(accountId, that.accountId) && Objects.equals(profileId, that.profileId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, accountId, profileId);
     }
 }
+
