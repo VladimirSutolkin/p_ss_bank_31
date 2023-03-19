@@ -1,22 +1,40 @@
 package com.bank.profile.service;
 
-import com.bank.profile.entity.audit;
+import com.bank.profile.dto.AuditDto;
+import com.bank.profile.entity.AuditEntity;
+import com.bank.profile.mapper.AuditMapper;
+import com.bank.profile.repository.AuditRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
-public interface AuditService {
+@Service
+public class AuditService {
 
+    private final AuditRepository auditRepository;
+    private final AuditMapper auditMapper;
 
-         // Создает новый аудит в базе данных
-        audit createAudit(audit audit);
-
-         // Обновляет информацию об аудите в базе данных
-        audit updateAudit(  audit audit);
-
-         //Удаляет аудит из базы данных по его идентификатору
-         void deleteAuditById(Long id);
-        //Получает аудит из базы данных по его идентификатору
-        audit getAuditById(Long auditId);
-    // Получает все аудиты из базы данных
-        List<audit> getAllAudits();
+    @Autowired
+    public AuditService(AuditRepository auditRepository, AuditMapper auditMapper) {
+        this.auditRepository = auditRepository;
+        this.auditMapper = auditMapper;
     }
 
+    public List<AuditDto> getAllAudits() {
+        List<AuditEntity> entities = auditRepository.findAll();
+        return auditMapper.toDtoList(entities);
+    }
+
+    public AuditDto getAuditById(Long id) {
+        Optional<AuditEntity> entity = auditRepository.findById(id);
+        return entity.map(auditMapper::toDto).orElse(null);
+    }
+
+    public void createAudit(AuditDto auditDto) {
+        AuditEntity entity = auditMapper.toEntity(auditDto);
+        auditRepository.save(entity);
+    }
+
+}

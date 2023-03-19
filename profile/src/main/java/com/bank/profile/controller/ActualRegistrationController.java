@@ -1,65 +1,37 @@
 package com.bank.profile.controller;
 
-import com.bank.profile.entity.ActualRegistration;
+import com.bank.profile.dto.ActualRegistrationDTO;
 import com.bank.profile.service.ActualRegistrationService;
-import org.springframework.http.HttpStatus;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
-@RequestMapping("/api/actual-registrations")
+@Log4j2
+@RequestMapping("/api/actual-registration")
 public class ActualRegistrationController {
 
+    private final ActualRegistrationService service;
+    private final Logger logger = LoggerFactory.getLogger(ActualRegistrationController.class);
 
-
-    private final ActualRegistrationService actualRegistrationService;
-
-
-
-    public ActualRegistrationController(ActualRegistrationService actualRegistrationService) {
-        this.actualRegistrationService = actualRegistrationService;
+    public ActualRegistrationController(ActualRegistrationService service) {
+        this.service = service;
     }
-
-
 
     @GetMapping
-    public List<ActualRegistration> getAllActualRegistrations() {
-        return actualRegistrationService.getAllActualRegistrations();
+    public ResponseEntity<List<ActualRegistrationDTO>> findAll() {
+        logger.info("Received request to get all actual registrations");
+        List<ActualRegistrationDTO> dtos = service.findAll();
+        logger.info("Returned {} actual registrations", dtos.size());
+        return ResponseEntity.ok(dtos);
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ActualRegistration> getActualRegistrationById(@PathVariable Long id) {
-        Optional<ActualRegistration> actualRegistration = actualRegistrationService.getActualRegistrationById(id);
-        if (actualRegistration.isPresent()) {
-            return ResponseEntity.ok(actualRegistration.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<ActualRegistration> createActualRegistration(@RequestBody ActualRegistration actualRegistration) {
-        ActualRegistration createdActualRegistration = actualRegistrationService.createActualRegistration(actualRegistration);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdActualRegistration);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ActualRegistration> updateActualRegistration(@PathVariable Long id, @RequestBody ActualRegistration actualRegistration) {
-        ActualRegistration updatedActualRegistration = actualRegistrationService.updateActualRegistration(id, actualRegistration);
-        if (updatedActualRegistration != null) {
-            return ResponseEntity.ok(updatedActualRegistration);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteActualRegistration(@PathVariable Long id) {
-        actualRegistrationService.deleteActualRegistration(id);
-        return ResponseEntity.noContent().build();
-    }
-
 }

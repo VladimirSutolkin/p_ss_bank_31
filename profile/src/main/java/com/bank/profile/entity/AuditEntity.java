@@ -1,55 +1,46 @@
 package com.bank.profile.entity;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.security.Timestamp;
 
 @Entity
 @Table(name = "audit")
-public class audit {
+public class AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
-
-    @Column(name = "entity_type", length = 40, nullable = false)
+    @NotBlank(message = "Entity type is required")
+    @Size(max = 50, message = "Entity type should not exceed 50 characters")
+    @Column(name = "entity_type", nullable = false)
     private String entityType;
-
-    @Column(name = "operation_type", length = 255, nullable = false)
+    @NotBlank(message = "Operation type is required")
+    @Size(max = 20, message = "Operation type should not exceed 20 characters")
+    @Column(name = "operation_type", nullable = false)
     private String operationType;
-
-    @Column(name = "created_by", length = 255, nullable = false)
+    @NotBlank(message = "Created by is required")
+    @Size(max = 50, message = "Created by should not exceed 50 characters")
+    @Column(name = "created_by", nullable = false)
     private String createdBy;
-
-    @Column(name = "modified_by", length = 255)
+    @NotBlank(message = "Modified by is required")
+    @Size(max = 50, message = "Modified by should not exceed 50 characters")
+    @Column(name = "modified_by")
     private String modifiedBy;
-
+    @NotNull(message = "Created at is required")
     @Column(name = "created_at", nullable = false)
-    private ZonedDateTime createdAt;
-
+    private Timestamp createdAt;
+    @NotNull(message = "Modified at is required")
     @Column(name = "modified_at")
-    private ZonedDateTime modifiedAt;
-
-    @Column(name = "new_entity_json", columnDefinition = "text")
+    private Timestamp modifiedAt;
+    @NotBlank(message = "New entity JSON is required")
+    @Column(name = "new_entity_json")
     private String newEntityJson;
-
-    @Column(name = "entity_json", columnDefinition = "text", nullable = false)
+    @NotBlank(message = "Entity JSON is required")
+    @Column(name = "entity_json", nullable = false)
     private String entityJson;
-
-    public audit() {
-    }
-
-    public audit(String entityType, String operationType, String createdBy, String modifiedBy, ZonedDateTime createdAt,
-                       ZonedDateTime modifiedAt, String newEntityJson, String entityJson) {
-        this.entityType = entityType;
-        this.operationType = operationType;
-        this.createdBy = createdBy;
-        this.modifiedBy = modifiedBy;
-        this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
-        this.newEntityJson = newEntityJson;
-        this.entityJson = entityJson;
-    }
 
     public Long getId() {
         return id;
@@ -91,19 +82,19 @@ public class audit {
         this.modifiedBy = modifiedBy;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getModifiedAt() {
+    public Timestamp getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(ZonedDateTime modifiedAt) {
+    public void setModifiedAt(Timestamp modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 

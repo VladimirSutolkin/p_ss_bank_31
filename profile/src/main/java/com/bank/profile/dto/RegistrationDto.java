@@ -1,82 +1,51 @@
-package com.bank.profile.entity;
+package com.bank.profile.dto;
 
-import javax.persistence.*;
 import javax.validation.constraints.*;
 
-@Entity
-@Table(name = "actual_registration")
-public class ActualRegistrationEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class RegistrationDto {
     private Long id;
-
     @NotBlank(message = "Country is required")
-    @Size(max = 100, message = "Country should not exceed 100 characters")
-    @Column(name = "country", nullable = false)
+    @Size(max = 50, message = "Country should not exceed 50 characters")
     private String country;
 
     @NotBlank(message = "Region is required")
-    @Size(max = 100, message = "Region should not exceed 100 characters")
-    @Column(name = "region")
+    @Size(max = 50, message = "Region should not exceed 50 characters")
     private String region;
 
     @NotBlank(message = "City is required")
-    @Size(max = 100, message = "City should not exceed 100 characters")
-    @Column(name = "city")
+    @Size(max = 50, message = "City should not exceed 50 characters")
     private String city;
 
-    @Size(max = 100, message = "District should not exceed 100 characters")
-    @Column(name = "district")
+    @Size(max = 50, message = "District should not exceed 50 characters")
     private String district;
 
     @NotBlank(message = "Locality is required")
-    @Size(max = 100, message = "Locality should not exceed 100 characters")
-    @Column(name = "locality")
+    @Size(max = 50, message = "Locality should not exceed 50 characters")
     private String locality;
 
     @NotBlank(message = "Street is required")
-    @Size(max = 100, message = "Street should not exceed 100 characters")
-    @Column(name = "street")
+    @Size(max = 50, message = "Street should not exceed 50 characters")
     private String street;
 
     @NotBlank(message = "House number is required")
     @Size(max = 10, message = "House number should not exceed 10 characters")
-    @Column(name = "house_number")
     private String houseNumber;
 
     @Size(max = 10, message = "House block should not exceed 10 characters")
-    @Column(name = "house_block")
     private String houseBlock;
 
     @NotBlank(message = "Flat number is required")
     @Size(max = 10, message = "Flat number should not exceed 10 characters")
-    @Column(name = "flat_number")
     private String flatNumber;
 
     @NotNull(message = "Index is required")
     @Min(value = 100000, message = "Index should be at least 6 digits")
     @Max(value = 999999, message = "Index should not exceed 6 digits")
-    @Column(name = "index", nullable = false)
     private Long index;
 
-    public ActualRegistrationEntity() {
-    }
-
-    public ActualRegistrationEntity(Long id, String country, String region, String city, String district, String locality, String street, String houseNumber, String houseBlock, String flatNumber, Long index) {
-        this.id = id;
-        this.country = country;
-        this.region = region;
-        this.city = city;
-        this.district = district;
-        this.locality = locality;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.houseBlock = houseBlock;
-        this.flatNumber = flatNumber;
-        this.index = index;
-    }
+    @NotNull(message = "Column is required")
+    @Min(value = 1, message = "Column should be at least 1")
+    private Integer column;
 
     public Long getId() {
         return id;
@@ -164,5 +133,13 @@ public class ActualRegistrationEntity {
 
     public void setIndex(Long index) {
         this.index = index;
+    }
+
+    public Integer getColumn() {
+        return column;
+    }
+
+    public void setColumn(Integer column) {
+        this.column = column;
     }
 }

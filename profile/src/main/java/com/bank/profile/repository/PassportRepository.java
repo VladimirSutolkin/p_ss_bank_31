@@ -1,9 +1,9 @@
 package com.bank.profile.repository;
 
-import com.bank.profile.entity.ActualRegistrationEntity;
+import com.bank.profile.entity.Passport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ActualRegistrationRepository extends JpaRepository<ActualRegistrationEntity, Long> {
+public interface PassportRepository extends JpaRepository<Passport, Long> {
 }

@@ -15,8 +15,8 @@ management:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: user
-    password: password
+    username: postgres
+    password: Polpa12siM!
   liquibase:
     default-schema: public_bank_information
     change-log: db/changelog/db.changelog-master.yaml
