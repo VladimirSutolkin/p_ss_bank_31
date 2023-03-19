@@ -3,8 +3,13 @@ package com.bank.profile.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import lombok.*;
+
 @Entity
 @Table(name = "actual_registration")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ActualRegistrationEntity {
 
     @Id
@@ -60,109 +65,4 @@ public class ActualRegistrationEntity {
     @Max(value = 999999, message = "Index should not exceed 6 digits")
     @Column(name = "index", nullable = false)
     private Long index;
-
-    public ActualRegistrationEntity() {
-    }
-
-    public ActualRegistrationEntity(Long id, String country, String region, String city, String district, String locality, String street, String houseNumber, String houseBlock, String flatNumber, Long index) {
-        this.id = id;
-        this.country = country;
-        this.region = region;
-        this.city = city;
-        this.district = district;
-        this.locality = locality;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.houseBlock = houseBlock;
-        this.flatNumber = flatNumber;
-        this.index = index;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getLocality() {
-        return locality;
-    }
-
-    public void setLocality(String locality) {
-        this.locality = locality;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getHouseBlock() {
-        return houseBlock;
-    }
-
-    public void setHouseBlock(String houseBlock) {
-        this.houseBlock = houseBlock;
-    }
-
-    public String getFlatNumber() {
-        return flatNumber;
-    }
-
-    public void setFlatNumber(String flatNumber) {
-        this.flatNumber = flatNumber;
-    }
-
-    public Long getIndex() {
-        return index;
-    }
-
-    public void setIndex(Long index) {
-        this.index = index;
-    }
 }

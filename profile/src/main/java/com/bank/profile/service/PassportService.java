@@ -1,7 +1,7 @@
 package com.bank.profile.service;
 
 import com.bank.profile.dto.PassportDto;
-import com.bank.profile.entity.Passport;
+import com.bank.profile.entity.passport;
 import com.bank.profile.entity.RegistrationEntity;
 import com.bank.profile.mapper.PassportMapper;
 import com.bank.profile.repository.PassportRepository;
@@ -25,25 +25,25 @@ public class PassportService {
     }
 
     public List<PassportDto> getAllPassports() {
-        List<Passport> passports = passportRepository.findAll();
+        List<passport> passports = passportRepository.findAll();
         return passports.stream()
                 .map(passportMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     public PassportDto getPassportById(Long id) {
-        Passport passport = passportRepository.findById(id)
+        passport passport = passportRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Passport with id " + id + " not found"));
         return passportMapper.toDto(passport);
     }
 
     public void createPassport(PassportDto passportDto) {
-        Passport passport = passportMapper.toEntity(passportDto);
+        passport passport = passportMapper.toEntity(passportDto);
         passportRepository.save(passport);
     }
 
     public void updatePassport(Long id, PassportDto passportDto) {
-        Passport passport = passportRepository.findById(id)
+        passport passport = passportRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Passport with id " + id + " not found"));
         passport.setSeries(passportDto.getSeries());
         passport.setNumber(passportDto.getNumber());
